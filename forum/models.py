@@ -24,5 +24,5 @@ class Post(models.Model):
 class PostRevision(models.Model):
     post = models.ForeignKey(Post)
     author = models.ForeignKey(User)
-    date_created = models.DateTimeField()
+    date_created = models.DateTimeField(auto_now=True)
     text = models.TextField()
