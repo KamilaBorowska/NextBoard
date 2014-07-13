@@ -29,6 +29,12 @@ class Post(models.Model):
     thread = models.ForeignKey(Thread)
 
 class PostRevision(models.Model):
+    """Model for representing post revisions.
+
+    The first revision for given post contains its author and date to
+    show to the user. The last revision shows the date it was created
+    on.
+    """
     post = models.ForeignKey(Post)
     author = models.ForeignKey(User)
     date_created = models.DateTimeField(auto_now=True)
