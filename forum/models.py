@@ -20,3 +20,9 @@ class Thread(models.Model):
 
 class Post(models.Model):
     thread = models.ForeignKey(Thread)
+
+class PostRevision(models.Model):
+    post = models.ForeignKey(Post)
+    author = models.ForeignKey(User)
+    date_created = models.DateTimeField()
+    text = models.TextField()
