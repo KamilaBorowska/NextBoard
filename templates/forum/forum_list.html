@@ -1,3 +1,6 @@
+{% extends "forum/base.html" %}
+
+{% block content %}
 {% if forum_list %}
     <ul>
     {% for forum in forum_list %}
@@ -8,3 +11,4 @@
 {% else %}
 <p>No forums defined.
 {% endif %}
+{% endblock %}

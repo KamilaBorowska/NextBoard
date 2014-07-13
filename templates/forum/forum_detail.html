@@ -1,3 +1,6 @@
+{% extends "forum/base.html" %}
+
+{% block content %}
 {% if forum.thread_set.all %}
     <ul>
     {% for thread in forum.thread_set.all %}
@@ -7,3 +10,4 @@
 {% else %}
     <p>No threads in a forum.
 {% endif %}
+{% endblock %}
