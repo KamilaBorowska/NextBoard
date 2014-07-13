@@ -46,3 +46,6 @@ class PostRevision(models.Model):
     author = models.ForeignKey(User)
     date_created = models.DateTimeField(auto_now=True)
     text = models.TextField()
+
+    class Meta:
+        ordering = ['date_created']
