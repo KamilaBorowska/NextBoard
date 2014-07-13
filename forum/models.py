@@ -35,6 +35,12 @@ class Post(models.Model):
     """
     thread = models.ForeignKey(Thread)
 
+    def first_revision(self):
+        return self.postrevision_set.first()
+
+    def last_revision(self):
+        return self.postrevision_set.last()
+
 class PostRevision(models.Model):
     """Model for representing post revisions.
 
