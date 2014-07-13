@@ -2,12 +2,20 @@
 
 {% block content %}
 {% if forum_list %}
-    <ul>
+    <table border=1>
+    <tr>
+    <th> Forum name
+    <th> Threads
+    <th> Posts
     {% for forum in forum_list %}
-        <li><p><a href="{% url 'forum' forum.id %}">{{ forum }}</a>
+        <tr>
+        <td>
+            <p><a href="{% url 'forum' forum.id %}">{{ forum }}</a>
             <p>{{ forum.description }}
+        <td> {{ forum.thread_set.count }}
+        <td> {{ forum.postcount }}
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
 <p>No forums defined.
 {% endif %}

@@ -23,6 +23,10 @@ class Forum(models.Model):
         """Show forum title."""
         return self.title
 
+    def postcount(self):
+        """Show forum postcount."""
+        return Post.objects.filter(thread__forum=self).count()
+
 class Thread(models.Model):
     """Model for representing threads."""
     forum = models.ForeignKey(Forum)
