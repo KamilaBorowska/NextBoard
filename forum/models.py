@@ -19,6 +19,10 @@ class Forum(models.Model):
     title = models.TextField()
     description = models.TextField()
 
+    def __str__(self):
+        """Show forum title."""
+        return self.title
+
 class Thread(models.Model):
     """Model for representing threads."""
     forum = models.ForeignKey(Forum)
