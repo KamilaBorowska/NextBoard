@@ -1,7 +1,7 @@
 {% if thread_list %}
     <ul>
     {% for thread in thread_list %}
-        <li>{{ thread }}
+        <li><a href="{% url 'thread' thread.id %}">{{ thread }}</a>
     {% endfor %}
     </ul>
 {% else %}
