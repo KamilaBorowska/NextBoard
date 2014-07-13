@@ -10,6 +10,9 @@ class User(auth.User):
     display_name = models.CharField(max_length=30, null=True)
     footer = models.TextField(null=True)
 
+    def __str__(self):
+        """Show display name or user name."""
+        return self.display_name or self.username
 
 class Thread(models.Model):
     """Model for representing threads."""
