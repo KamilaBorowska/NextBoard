@@ -1,7 +1,7 @@
 {% if forum_list %}
     <ul>
     {% for forum in forum_list %}
-        <li><p>{{ forum }}
+        <li><p><a href="{% url 'forum' forum.id %}">{{ forum }}</a>
             <p>{{ forum.description }}
     {% endfor %}
     </ul>

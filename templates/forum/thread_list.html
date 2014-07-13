@@ -1,0 +1,9 @@
+{% if thread_list %}
+    <ul>
+    {% for thread in thread_list %}
+        <li>{{ thread }}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No threads in a forum.
+{% endif %}
