@@ -12,7 +12,7 @@ class User(auth.User):
 
 class Thread(models.Model):
     """Model for representing threads."""
-    title = models.TextField()
+    title = models.CharField(max_length=100)
     views = models.PositiveIntegerField(default=0)
     sticky = models.BooleanField()
     closed = models.BooleanField()
