@@ -43,6 +43,10 @@ class Post(models.Model):
         return self.postrevision_set.first()
 
     def last_revision(self):
+        """Get last revision.
+
+        The last revision contains most current post contents.
+        """
         return self.postrevision_set.last()
 
 class PostRevision(models.Model):
