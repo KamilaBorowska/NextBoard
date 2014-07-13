@@ -21,6 +21,10 @@ class Thread(models.Model):
     sticky = models.BooleanField(default=False)
     closed = models.BooleanField(default=False)
 
+    def __str__(self):
+        """Show thread title."""
+        return self.title
+
 class Post(models.Model):
     """Model for representing posts.
 
