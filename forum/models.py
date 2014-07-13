@@ -56,6 +56,10 @@ class Post(models.Model):
         """
         return self.first_revision().author
 
+    def text(self):
+        """Get post contents."""
+        return self.last_revision().text
+
 class PostRevision(models.Model):
     """Model for representing post revisions.
 
