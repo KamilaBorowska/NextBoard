@@ -1,0 +1,10 @@
+{% if forum_list %}
+    <ul>
+    {% for forum in forum_list %}
+        <li><p>{{ forum }}
+            <p>{{ forum.description }}
+    {% endfor %}
+    </ul>
+{% else %}
+<p>No forums defined.
+{% endif %}
