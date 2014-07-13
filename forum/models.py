@@ -15,8 +15,8 @@ class Thread(models.Model):
     """Model for representing threads."""
     title = models.CharField(max_length=100)
     views = models.PositiveIntegerField(default=0)
-    sticky = models.BooleanField()
-    closed = models.BooleanField()
+    sticky = models.BooleanField(default=False)
+    closed = models.BooleanField(default=False)
 
 class Post(models.Model):
     thread = models.ForeignKey(Thread)
