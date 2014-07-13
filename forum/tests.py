@@ -1,5 +1,5 @@
 from django.test import TestCase
-from forum.models import User, Thread, Post, PostRevision
+from forum.models import Forum, User, Thread, Post, PostRevision
 
 class PostTestCase(TestCase):
     def setUp(self):
@@ -7,7 +7,8 @@ class PostTestCase(TestCase):
         user = User.objects.create(username='SampleGuy')
         author = User.objects.create(username='RelevantAuthor')
 
-        thread = Thread.objects.create(title='This is it')
+        forum = Forum.objects.create(title='Sample forum', description='Yes')
+        thread = Thread.objects.create(forum=forum, title='This is it')
         post = Post.objects.create(thread=thread)
 
         PostRevision.objects.create(post=post, text='A', author=author)
@@ -15,7 +16,7 @@ class PostTestCase(TestCase):
             PostRevision.objects.create(post=post, text=content, author=user)
 
         # Create unrelated thread to find possible issues in query.
-        unrelated_thread = Thread.objects.create(title='Unrelated thread')
+        unrelated_thread = Thread.objects.create(forum=forum, title='What?')
         unrelated_post = Post.objects.create(thread=unrelated_thread)
         PostRevision.objects.create(post=unrelated_post, text='F', author=user)
 

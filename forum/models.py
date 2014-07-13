@@ -14,8 +14,14 @@ class User(auth.User):
         """Show display name or user name."""
         return self.display_name or self.username
 
+class Forum(models.Model):
+    """Model for representing forums."""
+    title = models.TextField()
+    description = models.TextField()
+
 class Thread(models.Model):
     """Model for representing threads."""
+    forum = models.ForeignKey(Forum)
     title = models.CharField(max_length=100)
     views = models.PositiveIntegerField(default=0)
     sticky = models.BooleanField(default=False)
