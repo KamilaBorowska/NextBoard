@@ -50,6 +50,10 @@ class Post(models.Model):
         return self.postrevision_set.last()
 
     def author(self):
+        """Get author.
+
+        This usually shows along with the post.
+        """
         return self.first_revision().author
 
 class PostRevision(models.Model):
