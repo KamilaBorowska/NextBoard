@@ -19,6 +19,13 @@ class Thread(models.Model):
     closed = models.BooleanField(default=False)
 
 class Post(models.Model):
+    """Model for representing posts.
+
+    Actual posts are stored in PostRevision, this only stores the
+    thread number. The first created revision contains the author
+    of post and date of its creation. The last revision contains actual
+    text post.
+    """
     thread = models.ForeignKey(Thread)
 
 class PostRevision(models.Model):
