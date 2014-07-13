@@ -8,6 +8,7 @@ class User(auth.User):
     table, and are needed for the forum to work, like footers.
     """
     display_name = models.CharField(max_length=30, null=True)
+    footer = models.TextField(null=True)
 
 
 class Thread(models.Model):
