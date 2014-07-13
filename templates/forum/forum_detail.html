@@ -1,6 +1,6 @@
-{% if thread_list %}
+{% if forum.thread_set %}
     <ul>
-    {% for thread in thread_list %}
+    {% for thread in forum.thread_set.all %}
         <li><a href="{% url 'thread' thread.id %}">{{ thread }}</a>
     {% endfor %}
     </ul>

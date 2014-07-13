@@ -5,8 +5,8 @@ from forum.models import Forum, Thread, Post
 class ForumView(generic.ListView):
     model = Forum
 
-class ThreadView(generic.ListView):
-    model = Thread
+class ForumDetailView(generic.DetailView):
+    model = Forum
 
 class PostView(generic.ListView):
     model = Post
