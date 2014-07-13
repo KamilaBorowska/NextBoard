@@ -32,3 +32,6 @@ class PostTestCase(TestCase):
 
     def test_author(self):
         self.assertEqual(self.post.author(), self.author)
+
+    def test_text(self):
+        self.assertEqual(self.post.text(), 'E')
