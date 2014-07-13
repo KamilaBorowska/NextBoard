@@ -1,0 +1,5 @@
+<ul>
+{% for post in thread.post_set.all %}
+    <li>{{ post.text }}
+{% endfor %}
+</ul>

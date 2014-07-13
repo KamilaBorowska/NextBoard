@@ -8,5 +8,5 @@ class ForumView(generic.ListView):
 class ForumDetailView(generic.DetailView):
     model = Forum
 
-class PostView(generic.ListView):
-    model = Post
+class ThreadDetailView(generic.DetailView):
+    model = Thread
