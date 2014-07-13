@@ -36,6 +36,10 @@ class Post(models.Model):
     thread = models.ForeignKey(Thread)
 
     def first_revision(self):
+        """Get first revision.
+
+        The first revision is important for things like post author.
+        """
         return self.postrevision_set.first()
 
     def last_revision(self):
