@@ -17,3 +17,6 @@ class Thread(models.Model):
     views = models.PositiveIntegerField(default=0)
     sticky = models.BooleanField()
     closed = models.BooleanField()
+
+class Post(models.Model):
+    thread = models.ForeignKey(Thread)
