@@ -49,6 +49,9 @@ class Post(models.Model):
         """
         return self.postrevision_set.last()
 
+    def author(self):
+        return self.first_revision().author
+
 class PostRevision(models.Model):
     """Model for representing post revisions.
 
