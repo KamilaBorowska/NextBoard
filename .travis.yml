@@ -6,3 +6,5 @@ python:
   - "3.3"
   - "3.4"
 script: ./manage.py test
+before_script:
+  - psql -c 'create database nextboard;' -U postgres
