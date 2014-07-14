@@ -31,7 +31,7 @@ class Forum(models.Model):
     def last_post(self):
         """Show last post in the forum."""
         result = PostRevision.objects.raw('''
-            SELECT postrevision.id, post_id, author_id, date_created, text
+            SELECT postrevision.id, post_id, author_id, date_created
                 FROM forum_post AS post
                 JOIN forum_postrevision AS postrevision
                     ON postrevision.id = (SELECT id
@@ -70,7 +70,7 @@ class Thread(models.Model):
     def last_post(self):
         """Show last post in the thread."""
         return PostRevision.objects.raw('''
-            SELECT postrevision.id, post_id, author_id, date_created, text
+            SELECT postrevision.id, post_id, author_id, date_created
                 FROM forum_post AS post
                 JOIN forum_postrevision AS postrevision
                     ON postrevision.id = (SELECT id
