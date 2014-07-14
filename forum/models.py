@@ -65,7 +65,7 @@ class Thread(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['sticky']
+        ordering = ['-sticky']
 
     def last_post(self):
         """Show last post in the thread."""
