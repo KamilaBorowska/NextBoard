@@ -93,3 +93,10 @@ class ForumTestCase(TestCase):
         self.assertEqual(self.forums[1].last_post(), None)
         self.assertEqual(self.forums[2].last_post().id, self.revisions[6].id)
         self.assertEqual(self.forums[3].last_post(), None)
+
+    def test_postcount(self):
+        """Forums should have correct ammount of posts."""
+        self.assertEqual(self.forums[0].postcount(), 3)
+        self.assertEqual(self.forums[1].postcount(), 0)
+        self.assertEqual(self.forums[2].postcount(), 1)
+        self.assertEqual(self.forums[3].postcount(), 0)
