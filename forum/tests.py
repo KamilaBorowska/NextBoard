@@ -107,3 +107,10 @@ class ForumTestCase(TestCase):
         self.assertEqual(self.threads[0].last_post().id, self.revisions[2].id)
         self.assertEqual(self.threads[1].last_post().id, self.revisions[5].id)
         self.assertEqual(self.threads[2].last_post().id, self.revisions[6].id)
+
+    def test_thread_replies(self):
+        """Reply count should be number of post excluding first one."""
+
+        self.assertEqual(self.threads[0].replies(), 1)
+        self.assertEqual(self.threads[1].replies(), 0)
+        self.assertEqual(self.threads[2].replies(), 0)
