@@ -62,6 +62,9 @@ class Forum(models.Model):
         except IndexError:
             return None
 
+    class Meta:
+        order_with_respect_to = 'category'
+
 class Thread(models.Model):
     """Model for representing threads."""
     forum = models.ForeignKey(Forum)
