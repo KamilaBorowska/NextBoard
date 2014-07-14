@@ -36,3 +36,61 @@ class PostTestCase(TestCase):
 
     def test_text(self):
         self.assertEqual(self.post.text(), 'E')
+
+class ForumTestCase(TestCase):
+    def setUp(self):
+        """Prepare for testing forums."""
+        create_forum = Forum.objects.create
+
+        self.forums = forums = [
+            create_forum(title='This forum.', description='Eh.'),
+            create_forum(title='Creativity.', description='Is good.'),
+            create_forum(title='Randomness.', description='Who cares?'),
+            create_forum(title='Trash', description='Full of garbage.'),
+        ]
+
+        create_thread = Thread.objects.create
+
+        threads = [
+            create_thread(forum=forums[0], title='A'),
+            create_thread(forum=forums[0], title='B'),
+            create_thread(forum=forums[2], title='C'),
+        ]
+
+        create_post = Post.objects.create
+
+        posts = [
+            create_post(thread=threads[0]),
+            create_post(thread=threads[0]),
+            create_post(thread=threads[1]),
+            create_post(thread=threads[2]),
+        ]
+
+        user = User.objects.create()
+
+        def create_revision(post, date, text):
+            from datetime import datetime
+            return PostRevision.objects.create(
+                post=post,
+                author=user,
+                date_created=date,
+                text=text
+            )
+
+        self.revisions = [
+            create_revision(posts[0], '2000-01-01T00:00:00+00', 'D'),
+            create_revision(posts[0], '2012-01-01T01:00:00+00', 'E'),
+            create_revision(posts[1], '2001-02-02T02:00:00+00', 'F'),
+            create_revision(posts[1], '2002-03-03T03:00:00+00', 'G'),
+            create_revision(posts[1], '2003-04-04T04:00:00+00', 'H'),
+            create_revision(posts[2], '2001-01-01T05:00:00+00', 'I'),
+            create_revision(posts[3], '2000-12-31T06:00:00+00', 'J'),
+        ]
+
+    def test_last_post(self):
+        """Last post should be last post, ignoring revisions."""
+
+        self.assertEqual(self.forums[0].last_post().id, self.revisions[2].id)
+        self.assertEqual(self.forums[1].last_post(), None)
+        self.assertEqual(self.forums[2].last_post().id, self.revisions[6].id)
+        self.assertEqual(self.forums[3].last_post(), None)
