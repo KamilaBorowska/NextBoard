@@ -107,7 +107,7 @@ class PostRevision(models.Model):
     """
     post = models.ForeignKey(Post)
     author = models.ForeignKey(User)
-    date_created = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
     class Meta:
