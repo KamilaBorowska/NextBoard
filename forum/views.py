@@ -1,9 +1,9 @@
 from django.views import generic
 
-from forum.models import Forum, Thread, Post
+from forum.models import Category, Forum, Thread
 
-class ForumView(generic.ListView):
-    model = Forum
+class CategoryView(generic.ListView):
+    model = Category
 
 class ForumDetailView(generic.DetailView):
     model = Forum

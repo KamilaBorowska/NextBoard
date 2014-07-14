@@ -1,0 +1,32 @@
+{% extends "forum/base.html" %}
+
+{% block content %}
+{% if category_list %}
+    {% for category in category_list %}
+        <h1>{{ category }}</h1>
+        <table border=1>
+        <tr>
+        <th> Forum name
+        <th> Threads
+        <th> Posts
+        <th> Last post
+        {% for forum in category.forum_set.all %}
+            <tr>
+            <td>
+                <p><a href="{% url 'forum' forum.id %}">{{ forum }}</a>
+                <p>{{ forum.description }}
+            <td> {{ forum.thread_set.count }}
+            <td> {{ forum.postcount }}
+            <td>
+            {% if forum.last_post %}
+                {{ forum.last_post.author }} on {{ forum.last_post.date_created }}
+            {% else %}
+                Never.
+            {% endif %}
+        {% endfor %}
+        </table>
+    {% endfor %}
+{% else %}
+<p>No forums defined.
+{% endif %}
+{% endblock %}
