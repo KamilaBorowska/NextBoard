@@ -1,5 +1,6 @@
 from django.test import TestCase
-from forum.models import Forum, User, Thread, Post, PostRevision
+from forum.models import Category, Forum, User, Thread, Post, PostRevision
+from functools import partial
 
 class PostTestCase(TestCase):
     def setUp(self):
@@ -7,7 +8,12 @@ class PostTestCase(TestCase):
         user = User.objects.create(username='SampleGuy')
         author = User.objects.create(username='RelevantAuthor')
 
-        forum = Forum.objects.create(title='Sample forum', description='Yes')
+        category = Category.objects.create(name='Category')
+        forum = Forum.objects.create(
+            category=category,
+            title='Sample forum',
+            description='Yes'
+        )
         thread = Thread.objects.create(forum=forum, title='This is it')
         post = Post.objects.create(thread=thread)
 
@@ -40,7 +46,9 @@ class PostTestCase(TestCase):
 class ForumTestCase(TestCase):
     def setUp(self):
         """Prepare for testing forums."""
-        create_forum = Forum.objects.create
+        category = Category.objects.create(name='Sample category')
+
+        create_forum = partial(Forum.objects.create, category=category)
 
         self.forums = forums = [
             create_forum(title='This forum.', description='Eh.'),

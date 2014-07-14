@@ -16,8 +16,16 @@ class User(auth.User):
         """Show display name or user name."""
         return self.display_name or self.username
 
+class Category(models.Model):
+    name = models.TextField()
+
+    def __str__(self):
+        """Show category name."""
+        return self.name
+
 class Forum(models.Model):
     """Model for representing forums."""
+    category = models.ForeignKey(Category)
     title = models.TextField()
     description = models.TextField()
 
