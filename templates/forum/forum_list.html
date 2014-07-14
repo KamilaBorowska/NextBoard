@@ -7,6 +7,7 @@
     <th> Forum name
     <th> Threads
     <th> Posts
+    <th> Last post
     {% for forum in forum_list %}
         <tr>
         <td>
@@ -14,6 +15,12 @@
             <p>{{ forum.description }}
         <td> {{ forum.thread_set.count }}
         <td> {{ forum.postcount }}
+        <td>
+        {% if forum.last_post %}
+            {{ forum.last_post.author }} on {{ forum.last_post.date_created }}
+        {% else %}
+            Never.
+        {% endif %}
     {% endfor %}
     </table>
 {% else %}

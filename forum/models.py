@@ -27,6 +27,30 @@ class Forum(models.Model):
         """Show forum postcount."""
         return Post.objects.filter(thread__forum=self).count()
 
+    def last_post(self):
+        """Show last post in the forum."""
+        result = PostRevision.objects.raw('''
+            SELECT postrevision.id, post_id, author_id, date_created, text
+                FROM forum_post AS post
+                JOIN forum_postrevision AS postrevision
+                    ON postrevision.id = (SELECT id
+                        FROM forum_postrevision
+                        WHERE post_id = post.id
+                        ORDER BY date_created
+                        LIMIT 1
+                    )
+                JOIN forum_thread AS thread
+                    ON thread.id = thread.id
+                WHERE forum_id = %s
+                ORDER BY date_created
+                LIMIT 1
+        ''', [self.id])
+
+        try:
+            return result[0]
+        except IndexError:
+            return None
+
 class Thread(models.Model):
     """Model for representing threads."""
     forum = models.ForeignKey(Forum)
