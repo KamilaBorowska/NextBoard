@@ -64,6 +64,9 @@ class Thread(models.Model):
         """Show thread title."""
         return self.title
 
+    class Meta:
+        ordering = ['sticky']
+
 class Post(models.Model):
     """Model for representing posts.
 
