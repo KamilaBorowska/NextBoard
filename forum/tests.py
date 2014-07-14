@@ -89,10 +89,10 @@ class ForumTestCase(TestCase):
     def test_last_post(self):
         """Last post should be last post, ignoring revisions."""
 
-        self.assertEqual(self.forums[0].last_post().id, self.revisions[2].id)
-        self.assertEqual(self.forums[1].last_post(), None)
-        self.assertEqual(self.forums[2].last_post().id, self.revisions[6].id)
-        self.assertEqual(self.forums[3].last_post(), None)
+        self.assertEqual(self.forums[0].last_post.id, self.revisions[2].id)
+        self.assertEqual(self.forums[1].last_post, None)
+        self.assertEqual(self.forums[2].last_post.id, self.revisions[6].id)
+        self.assertEqual(self.forums[3].last_post, None)
 
     def test_postcount(self):
         """Forums should have correct ammount of posts."""
@@ -104,9 +104,9 @@ class ForumTestCase(TestCase):
     def test_thread_last_post(self):
         """Last post should be last post of given thread."""
 
-        self.assertEqual(self.threads[0].last_post().id, self.revisions[2].id)
-        self.assertEqual(self.threads[1].last_post().id, self.revisions[5].id)
-        self.assertEqual(self.threads[2].last_post().id, self.revisions[6].id)
+        self.assertEqual(self.threads[0].last_post.id, self.revisions[2].id)
+        self.assertEqual(self.threads[1].last_post.id, self.revisions[5].id)
+        self.assertEqual(self.threads[2].last_post.id, self.revisions[6].id)
 
     def test_thread_replies(self):
         """Reply count should be number of post excluding first one."""
