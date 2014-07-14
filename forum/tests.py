@@ -69,7 +69,6 @@ class ForumTestCase(TestCase):
         user = User.objects.create()
 
         def create_revision(post, date, text):
-            from datetime import datetime
             return PostRevision.objects.create(
                 post=post,
                 author=user,
@@ -78,13 +77,13 @@ class ForumTestCase(TestCase):
             )
 
         self.revisions = [
-            create_revision(posts[0], '2000-01-01T00:00:00+00', 'D'),
-            create_revision(posts[0], '2012-01-01T01:00:00+00', 'E'),
-            create_revision(posts[1], '2001-02-02T02:00:00+00', 'F'),
-            create_revision(posts[1], '2002-03-03T03:00:00+00', 'G'),
-            create_revision(posts[1], '2003-04-04T04:00:00+00', 'H'),
-            create_revision(posts[2], '2001-01-01T05:00:00+00', 'I'),
-            create_revision(posts[3], '2000-12-31T06:00:00+00', 'J'),
+            create_revision(posts[0], '2000-01-01 00:00+00:00', 'D'),
+            create_revision(posts[0], '2012-01-01 01:00+00:00', 'E'),
+            create_revision(posts[1], '2001-02-02 02:00+00:00', 'F'),
+            create_revision(posts[1], '2002-03-03 03:00+00:00', 'G'),
+            create_revision(posts[1], '2003-04-04 04:00+00:00', 'H'),
+            create_revision(posts[2], '2001-01-01 05:00+00:00', 'I'),
+            create_revision(posts[3], '2000-12-31 06:00+00:00', 'J'),
         ]
 
     def test_last_post(self):
