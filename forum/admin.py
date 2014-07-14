@@ -1,6 +1,11 @@
 from django.contrib import admin
 from forum.models import Category, Forum, Thread
 
-admin.site.register(Category)
-admin.site.register(Forum)
+class ForumInline(admin.StackedInline):
+    model = Forum
+
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [ForumInline]
+
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Thread)
