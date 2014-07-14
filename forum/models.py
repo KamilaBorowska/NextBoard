@@ -67,6 +67,23 @@ class Thread(models.Model):
     class Meta:
         ordering = ['sticky']
 
+    def last_post(self):
+        """Show last post in the thread."""
+        return PostRevision.objects.raw('''
+            SELECT postrevision.id, post_id, author_id, date_created, text
+                FROM forum_post AS post
+                JOIN forum_postrevision AS postrevision
+                    ON postrevision.id = (SELECT id
+                        FROM forum_postrevision
+                        WHERE post_id = post.id
+                        ORDER BY date_created
+                        LIMIT 1
+                    )
+                WHERE thread_id = %s
+                ORDER BY date_created DESC
+                LIMIT 1
+        ''', [self.id])[0]
+
 class Post(models.Model):
     """Model for representing posts.
 
