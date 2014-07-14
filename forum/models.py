@@ -88,6 +88,10 @@ class Thread(models.Model):
         """Show author of post."""
         return self.post_set.first().author()
 
+    def replies(self):
+        """Show number of replies in thread."""
+        return self.post_set.count() - 1
+
 class Post(models.Model):
     """Model for representing posts.
 
