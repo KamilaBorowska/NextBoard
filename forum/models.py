@@ -1,6 +1,7 @@
 from django.db import models
 import django.contrib.auth.models as auth
 from django.utils.timezone import now
+from django.utils.functional import cached_property
 
 class User(auth.User):
     """Model for representing users.
@@ -28,6 +29,7 @@ class Forum(models.Model):
         """Show forum postcount."""
         return Post.objects.filter(thread__forum=self).count()
 
+    @cached_property
     def last_post(self):
         """Show last post in the forum."""
         result = PostRevision.objects.raw('''
@@ -67,6 +69,7 @@ class Thread(models.Model):
     class Meta:
         ordering = ['-sticky']
 
+    @cached_property
     def last_post(self):
         """Show last post in the thread."""
         return PostRevision.objects.raw('''
