@@ -17,7 +17,7 @@ class User(auth.User):
         return self.display_name or self.username
 
 class Category(models.Model):
-    name = models.TextField()
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         """Show category name."""
