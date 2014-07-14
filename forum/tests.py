@@ -51,7 +51,7 @@ class ForumTestCase(TestCase):
 
         create_thread = Thread.objects.create
 
-        threads = [
+        self.threads = threads = [
             create_thread(forum=forums[0], title='A'),
             create_thread(forum=forums[0], title='B'),
             create_thread(forum=forums[2], title='C'),
@@ -100,3 +100,10 @@ class ForumTestCase(TestCase):
         self.assertEqual(self.forums[1].postcount(), 0)
         self.assertEqual(self.forums[2].postcount(), 1)
         self.assertEqual(self.forums[3].postcount(), 0)
+
+    def test_thread_last_post(self):
+        """Last post should be last post of given thread."""
+
+        self.assertEqual(self.threads[0].last_post().id, self.revisions[2].id)
+        self.assertEqual(self.threads[1].last_post().id, self.revisions[5].id)
+        self.assertEqual(self.threads[2].last_post().id, self.revisions[6].id)
