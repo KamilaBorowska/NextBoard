@@ -26,7 +26,7 @@ class Category(models.Model):
 class Forum(models.Model):
     """Model for representing forums."""
     category = models.ForeignKey(Category)
-    title = models.TextField()
+    title = models.CharField(max_length=100)
     description = models.TextField()
 
     def __str__(self):
