@@ -84,6 +84,10 @@ class Thread(models.Model):
                 LIMIT 1
         ''', [self.id])[0]
 
+    def author(self):
+        """Show author of post."""
+        return self.post_set.first().author()
+
 class Post(models.Model):
     """Model for representing posts.
 
