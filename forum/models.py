@@ -40,7 +40,7 @@ class Forum(models.Model):
                         LIMIT 1
                     )
                 JOIN forum_thread AS thread
-                    ON thread.id = thread.id
+                    ON thread.id = thread_id
                 WHERE forum_id = %s
                 ORDER BY date_created
                 LIMIT 1
