@@ -15,7 +15,7 @@
         <td>{{ thread.author }}
         <td>{{ thread.replies }}
         <td>{{ thread.views }}
-        <td>{{ thread.last_post.author }}
+        <td>{{ thread.last_post.author }} on {{ thread.last_post.date_created }}
     {% endfor %}
     </table>
 {% else %}
