@@ -42,7 +42,7 @@ class Forum(models.Model):
                 JOIN forum_thread AS thread
                     ON thread.id = thread_id
                 WHERE forum_id = %s
-                ORDER BY date_created
+                ORDER BY date_created DESC
                 LIMIT 1
         ''', [self.id])
 
