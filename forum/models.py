@@ -1,5 +1,6 @@
 from django.db import models
 import django.contrib.auth.models as auth
+from django.utils.timezone import now
 
 class User(auth.User):
     """Model for representing users.
@@ -107,7 +108,7 @@ class PostRevision(models.Model):
     """
     post = models.ForeignKey(Post)
     author = models.ForeignKey(User)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(default=now)
     text = models.TextField()
 
     class Meta:
