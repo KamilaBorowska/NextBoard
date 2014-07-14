@@ -2,11 +2,22 @@
 
 {% block content %}
 {% if forum.thread_set.all %}
-    <ul>
+    <table border=1>
+    <tr>
+    <th> Title
+    <th> Started by
+    <th> Replies
+    <th> Views
+    <th> Last post
     {% for thread in forum.thread_set.all %}
-        <li><a href="{% url 'thread' thread.id %}">{{ thread }}</a>
+        <tr>
+        <td><a href="{% url 'thread' thread.id %}">{{ thread }}</a>
+        <td>{{ thread.author }}
+        <td>{{ thread.replies }}
+        <td>{{ thread.views }}
+        <td>{{ thread.last_post.author }}
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No threads in a forum.
 {% endif %}
