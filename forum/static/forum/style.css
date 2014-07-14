@@ -1,0 +1,11 @@
+table[border="1"] {
+    width: 700px;
+    max-width: 100%;
+    border-collapse: collapse;
+}
+table[border="1"] th {
+    background: #CCF;
+}
+table[border="1"] td {
+    padding: 4px;
+}

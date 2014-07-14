@@ -1,3 +1,7 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <title>{% block title %}{% endblock %}</title>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link href="{% static "forum/style.css" %}" rel="stylesheet">
+
 {% block content %}{% endblock %}
