@@ -18,7 +18,7 @@ class PostTestCase(TestCase):
         post = Post.objects.create(thread=thread)
 
         Revision.objects.create(post=post, text='A', author=author)
-        for content in ['B', 'C', 'D', 'E']:
+        for content in ['B', 'C', 'D', 'Something _else_.']:
             Revision.objects.create(post=post, text=content, author=user)
 
         # Create unrelated thread to find possible issues in query.
@@ -35,13 +35,13 @@ class PostTestCase(TestCase):
 
     def test_last_revision(self):
         """Last revision should be the final revision."""
-        self.assertEqual(self.post.last_revision().text, 'E')
+        self.assertEqual(self.post.last_revision().text, 'Something _else_.')
 
     def test_author(self):
         self.assertEqual(self.post.author(), self.author)
 
-    def test_text(self):
-        self.assertEqual(self.post.text(), 'E')
+    def test_html(self):
+        self.assertEqual(self.post.html, '<p>Something <em>else</em>.</p>')
 
 class ForumTestCase(TestCase):
     def setUp(self):

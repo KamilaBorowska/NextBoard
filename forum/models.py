@@ -139,9 +139,10 @@ class Post(models.Model):
         """
         return self.first_revision().author
 
-    def text(self):
-        """Get post contents."""
-        return self.last_revision().text
+    @cached_property
+    def html(self):
+        """Get post contents in HTML format."""
+        return self.last_revision().html
 
 class Revision(models.Model):
     """Model for representing post revisions.
@@ -157,6 +158,7 @@ class Revision(models.Model):
 
     @cached_property
     def html(self):
+        """Return HTML version of post (in Markdown format)."""
         return markdown(self.text)
 
     class Meta:
