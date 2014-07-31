@@ -1,5 +1,5 @@
 from django.test import TestCase
-from forum.models import Category, Forum, User, Thread, Post, PostRevision
+from forum.models import Category, Forum, User, Thread, Post, Revision
 from functools import partial
 
 class PostTestCase(TestCase):
@@ -17,14 +17,14 @@ class PostTestCase(TestCase):
         thread = Thread.objects.create(forum=forum, title='This is it')
         post = Post.objects.create(thread=thread)
 
-        PostRevision.objects.create(post=post, text='A', author=author)
+        Revision.objects.create(post=post, text='A', author=author)
         for content in ['B', 'C', 'D', 'E']:
-            PostRevision.objects.create(post=post, text=content, author=user)
+            Revision.objects.create(post=post, text=content, author=user)
 
         # Create unrelated thread to find possible issues in query.
         unrelated_thread = Thread.objects.create(forum=forum, title='What?')
         unrelated_post = Post.objects.create(thread=unrelated_thread)
-        PostRevision.objects.create(post=unrelated_post, text='F', author=user)
+        Revision.objects.create(post=unrelated_post, text='F', author=user)
 
         self.post = post
         self.author = author
@@ -77,7 +77,7 @@ class ForumTestCase(TestCase):
         user = User.objects.create()
 
         def create_revision(post, date, text):
-            return PostRevision.objects.create(
+            return Revision.objects.create(
                 post=post,
                 author=user,
                 date_created=date,

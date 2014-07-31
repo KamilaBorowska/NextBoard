@@ -40,12 +40,12 @@ class Forum(models.Model):
     @cached_property
     def last_post(self):
         """Show last post in the forum."""
-        result = PostRevision.objects.raw('''
-            SELECT postrevision.id, post_id, author_id, date_created
+        result = Revision.objects.raw('''
+            SELECT revision.id, post_id, author_id, date_created
                 FROM forum_post AS post
-                JOIN forum_postrevision AS postrevision
-                    ON postrevision.id = (SELECT id
-                        FROM forum_postrevision
+                JOIN forum_revision AS revision
+                    ON revision.id = (SELECT id
+                        FROM forum_revision
                         WHERE post_id = post.id
                         ORDER BY date_created
                         LIMIT 1
@@ -83,12 +83,12 @@ class Thread(models.Model):
     @cached_property
     def last_post(self):
         """Show last post in the thread."""
-        return PostRevision.objects.raw('''
-            SELECT postrevision.id, post_id, author_id, date_created
+        return Revision.objects.raw('''
+            SELECT revision.id, post_id, author_id, date_created
                 FROM forum_post AS post
-                JOIN forum_postrevision AS postrevision
-                    ON postrevision.id = (SELECT id
-                        FROM forum_postrevision
+                JOIN forum_revision AS revision
+                    ON revision.id = (SELECT id
+                        FROM forum_revision
                         WHERE post_id = post.id
                         ORDER BY date_created
                         LIMIT 1
@@ -109,7 +109,7 @@ class Thread(models.Model):
 class Post(models.Model):
     """Model for representing posts.
 
-    Actual posts are stored in PostRevision, this only stores the
+    Actual posts are stored in Revision, this only stores the
     thread number. The first created revision contains the author
     of post and date of its creation. The last revision contains actual
     text post.
@@ -121,14 +121,14 @@ class Post(models.Model):
 
         The first revision is important for things like post author.
         """
-        return self.postrevision_set.first()
+        return self.revision_set.first()
 
     def last_revision(self):
         """Get last revision.
 
         The last revision contains most current post contents.
         """
-        return self.postrevision_set.last()
+        return self.revision_set.last()
 
     def author(self):
         """Get author.
@@ -141,7 +141,7 @@ class Post(models.Model):
         """Get post contents."""
         return self.last_revision().text
 
-class PostRevision(models.Model):
+class Revision(models.Model):
     """Model for representing post revisions.
 
     The first revision for given post contains its author and date to
