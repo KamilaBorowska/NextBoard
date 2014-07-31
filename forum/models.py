@@ -3,6 +3,8 @@ import django.contrib.auth.models as auth
 from django.utils.timezone import now
 from django.utils.functional import cached_property
 
+from markdown import markdown
+
 class User(auth.User):
     """Model for representing users.
 
@@ -152,6 +154,10 @@ class Revision(models.Model):
     author = models.ForeignKey(User)
     date_created = models.DateTimeField(default=now)
     text = models.TextField()
+
+    @cached_property
+    def html(self):
+        return markdown(self.text)
 
     class Meta:
         ordering = ['date_created']
