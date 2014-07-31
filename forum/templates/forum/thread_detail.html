@@ -3,7 +3,7 @@
 {% block content %}
 <ul>
 {% for post in thread.post_set.all %}
-    <li>{{ post.text }}
+    <li>{{ post.html }}
 {% endfor %}
 </ul>
 {% endblock %}
