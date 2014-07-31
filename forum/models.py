@@ -2,6 +2,7 @@ from django.db import models
 import django.contrib.auth.models as auth
 from django.utils.timezone import now
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 
 from markdown import markdown
 
@@ -159,7 +160,7 @@ class Revision(models.Model):
     @cached_property
     def html(self):
         """Return HTML version of post (in Markdown format)."""
-        return markdown(self.text)
+        return mark_safe(markdown(self.text))
 
     class Meta:
         ordering = ['date_created']
